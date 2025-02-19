@@ -2,6 +2,21 @@
 import argparse
 import pyterrier as pt
 from pyterrier_dr import BGEM3, FlexIndex
+from models import model_paths
+
+def iter_jsonl(filename, verbose=True):
+    import json
+    from tqdm import tqdm
+    with open(filename, 'rt') as file:
+        lines = file.readlines()
+        if verbose:
+            lines = tqdm(lines, desc="Reading JSONL file")
+        for line in lines:
+            # assumes that each line contains 'docno', 'text' attributes
+            # rename "id" attribute to "docno"
+            line = line.replace('"id"', '"docno"')
+            # yields a dictionary for each json line
+            yield json.loads(line)
 
 # Create an argument parser
 parser = argparse.ArgumentParser(description='Indexing script')
@@ -20,24 +35,11 @@ model = args.model
 batch_size = int(args.batch_size)
 max_length = int(args.max_length)
 
-# create a BGEM3 encoder
-model_paths = {
-    "bgem3": None,
-    "bgem3-ru-zh-random-50": "/root/nfs/CLIR/data/models/bge-m3-RU_ZH_MMARCO_50",
-    "bgem3-ru-zh-random-50-2M": "/root/nfs/CLIR/data/models/bge-m3-RU_ZH_MMARCO_50_2M",
-    "bgem3-zh-50": "/root/nfs/CLIR/data/models/bge-m3-ZH_MMARCO_50",
-    "bgem3-ru-zh-50-2M-NEW": "/root/nfs/CLIR/data/models/bge-m3-RU-ZH_MMARCO_50_2M_NEW",
-    "bge-m3-ZH_MMARCO_NATIVE": "/root/nfs/CLIR/data/models/bge-m3-ZH_MMARCO_NATIVE",
-    "bge-m3-RU_MMARCO_NATIVE": "/root/nfs/CLIR/data/models/bge-m3-RU_MMARCO_NATIVE",
-    "bge-m3-RU_MMARCO_50": "/root/nfs/CLIR/data/models/bge-m3-RU_MMARCO_50",
-    "bge-m3-RU_MMARCO_TRANSLIT": "/root/nfs/CLIR/data/models/bge-m3-RU_MMARCO_TRANSLIT",
-    "bge-m3-ZH_MMARCO_TRANSLIT": "/root/nfs/CLIR/data/models/bge-m3-tZH_MMARCO"
-}
-
 if model not in model_paths:
     raise ValueError(f"Model {model} not supported")
-
 model_path = model_paths[model]
+
+# create a BGEM3 encoder
 factory = BGEM3(batch_size=batch_size, max_length=max_length, model_name=model_path) if model_path else BGEM3(batch_size=batch_size, max_length=max_length)
 index = FlexIndex(f"/root/nfs/CLIR/data/indices/{dataset}_{model}", verbose=True)
 encoder = factory.doc_encoder()

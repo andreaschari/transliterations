@@ -3,6 +3,9 @@ import ir_datasets
 import logging
 from tqdm import tqdm
 import argparse
+from pyterrier_anserini import AnseriniTokenizer
+# import anserini tokenizer
+tokenizer = AnseriniTokenizer.zh.tokenize
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
@@ -42,22 +45,26 @@ if do_docs:
         with open(f"{output_path}/{dataset_name}_uroman_docs.tsv", "a") as f:
             f.write(f"{doc_id}\t{romanized_doc}\n")
 else:
-    # iterate over the dev small queries and romanize them saving to a file
     for query in tqdm(dataset.queries_iter(), desc="Romanizing queries"):
         query_id = query.query_id
         if "neuclir" in dataset_name:
             ht_title = query.ht_title
             mt_title = query.mt_title
             ht_description = query.ht_description
-            
+  
             romanized_ht_title = romanizer.romanize_string(ht_title, lang=lang)
             romanized_mt_title = romanizer.romanize_string(mt_title, lang=lang)
             romanized_ht_desc = romanizer.romanize_string(ht_description, lang=lang)
+
             # save all queries to the same file in TSV format
             with open(f"{output_path}/{dataset_name}_uroman.tsv", "a") as f:
                 f.write(f"{query_id}\t{romanized_ht_title}\t{romanized_mt_title}\t{romanized_ht_desc}\n")
         else:
             query_text = query.text
+            # tokenize the query text
+            # tokenized_query = tokenizer(query_text)
+            # romanized_query = " ".join(tokenized_query)
+            # romanized_query = romanizer.romanize_string(" ".join(tokenized_query), lang=lang)
             romanized_query = romanizer.romanize_string(query_text, lang=lang)
             
             # save all queries to the same file in TSV format
