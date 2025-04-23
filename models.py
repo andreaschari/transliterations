@@ -13,13 +13,13 @@ model_paths = {
 
 t5_model_paths = {
     "mt5": None,
-    "mt5_zh_50": "/root/nfs/CLIR/data/models/mt5-ZH_MMARCO_50/epoch-0",
-    "mt5_zh_native": "/root/nfs/CLIR/data/models/mt5-ZH_MMARCO_NATIVE/epoch-0",
-    "mt5_zh_translit": "/root/nfs/CLIR/data/models/mt5-ZH_MMARCO_TRANSLIT/epoch-0",
-    "mt5_ru_native": "/root/nfs/CLIR/data/models/mt5-RU_MMARCO_NATIVE/epoch-0",
-    "mt5_ru_50": "/root/nfs/CLIR/data/models/mt5-RU_MMARCO_50/epoch-0",
-    "mt5_ru_translit": "/root/nfs/CLIR/data/models/mt5-RU_MMARCO_TRANSLIT/epoch-0",
-    "mt5_zh_50_spaces": "/root/nfs/CLIR/data/models/mt5-ZH_MMARCO_50_SPACES/epoch-0",
-    "mt5_zh_native_spaces": "/root/nfs/CLIR/data/models/mt5-ZH_MMARCO_NATIVE_SPACES/epoch-0",
-    "mt5_zh_translit_spaces": "/root/nfs/CLIR/data/models/mt5-ZH_MMARCO_TRANSLIT_SPACES/epoch-0",
+    "mt5_zh_50": "andreaschari/mt5-ZH_MMARCO_50_MIXED",
+    "mt5_zh_50_spaces": "andreaschari/mt5-ZH_MMARCO_50_MIXED_ANSERINI",
+    "mt5_zh_native": "andreaschari/mt5-ZH_MMARCO_NATIVE",
+    "mt5_zh_native_spaces": "andreaschari/mt5-ZH_MMARCO_NATIVE_ANSERINI",
+    "mt5_zh_translit": "/andreaschari/mt5-ZH_MMARCO_TRANSLIT",
+    "mt5_zh_translit_spaces": "andreaschari/mt5-ZH_MMARCO_TRANSLIT_ANSERINI",
+    "mt5_ru_native": "/andreaschari/mt5-RU_MMARCO_TRANSLIT",
+    "mt5_ru_50": "andreaschari/mt5-RU_MMARCO_50_MIXED",
+    "mt5_ru_translit": "andreaschari/mt5-RU_MMARCO_TRANSLIT",
 }
