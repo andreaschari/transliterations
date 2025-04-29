@@ -3,9 +3,9 @@ import ir_datasets
 import logging
 from tqdm import tqdm
 import argparse
-from pyterrier_anserini import AnseriniTokenizer
+# from pyterrier_anserini import AnseriniTokenizer
 # import anserini tokenizer
-tokenizer = AnseriniTokenizer.zh.tokenize
+# tokenizer = AnseriniTokenizer.zh.tokenize
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')

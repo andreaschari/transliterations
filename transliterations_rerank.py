@@ -22,6 +22,7 @@ dataset_name = args.dataset
 rerank_model = args.rerank_model
 evaluate = args.evaluate
 
+TRANSLITERATION_DIR = "/root/nfs/CLIR/data/transliterations" # change this to the directory where the transliterations are stored
 RETRIEVAL_RESULTS_DIR = "/root/nfs/CLIR/data/retrieval_results" # change this to the directory where the retrieval results are stored
 
 if rerank_model in t5_model_paths:
@@ -44,7 +45,7 @@ if "neuclir" in dataset_name:
     # print no. of queries
     logging.info(f"Loaded {len(queries_orig)} queries for {dataset_name} (HT)")
     # pre-process transliterated queries
-    queries = pd.read_csv(f"/root/nfs/CLIR/data/transliterations/{dataset_name_storage}_uroman.tsv", sep="\t", header=None, names=["qid", "ht_title", "mt_title", "ht_description"])
+    queries = pd.read_csv(f"{TRANSLITERATION_DIR}/{dataset_name_storage}_uroman.tsv", sep="\t", header=None, names=["qid", "ht_title", "mt_title", "ht_description"])
     queries["qid"] = queries["qid"].astype(str)
     queries["ht_title"] = queries["ht_title"].astype(str)
     # rename ht_title to query
@@ -57,7 +58,7 @@ else:
     dataset = pt.get_dataset(f"irds:{dataset_name}/{lang}/dev/small")
     queries_orig = dataset.get_topics(tokenise_query=False)
     # pre-process transliterated queries
-    queries = pd.read_csv(f"/root/nfs/CLIR/data/transliterations/mmarco_v2_{lang}_dev_small_uroman.tsv", sep="\t", header=None, names=["qid", "query"])
+    queries = pd.read_csv(f"{TRANSLITERATION_DIR}/mmarco_v2_{lang}_dev_small_uroman.tsv", sep="\t", header=None, names=["qid", "query"])
     queries["query"] = queries["query"].astype(str)
     queries["qid"] = queries["qid"].astype(str)
     logging.info(f"Loaded {len(queries)} queries for {lang}")

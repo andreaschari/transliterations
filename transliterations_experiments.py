@@ -25,6 +25,9 @@ first_stage_model = args.model
 dataset_name = args.dataset
 evaluate = args.evaluate
 
+TRANSLITERATIONS_DIR = "/root/nfs/CLIR/data/transliterations" # Change this to your transliterations directory
+RETRIEVAL_DIR = "/root/nfs/CLIR/data/retrieval_results" # Change this to your retrieval results directory
+
 # Check if the index directory exists
 if not os.path.isdir(index_path):
     raise FileNotFoundError(f"The index: {index_path} does not exist")
@@ -46,7 +49,7 @@ if "neuclir" in dataset_name:
     logging.info(f"Loaded {len(queries_orig)} queries for {dataset_name} (HT)")
 
     # pre-process transliterated queries (assumes they are already tokenized before romanisation)
-    queries_translit = pd.read_csv(f"/root/nfs/CLIR/data/transliterations/{dataset_name_storage}_uroman.tsv", sep="\t", header=None, names=["qid", "ht_title", "mt_title", "ht_description"])
+    queries_translit = pd.read_csv(f"{TRANSLITERATIONS_DIR}/{dataset_name_storage}_uroman.tsv", sep="\t", header=None, names=["qid", "ht_title", "mt_title", "ht_description"])
     queries_translit["qid"] = queries_translit["qid"].astype(str)
     queries_translit["ht_title"] = queries_translit["ht_title"].astype(str)
     queries_translit["mt_title"] = queries_translit["mt_title"].astype(str)
@@ -62,7 +65,7 @@ else:
     logging.info(f"Loaded {len(queries_orig)} queries for {dataset_name}/{lang}")
 
     # pre-process transliterated queries
-    queries_translit = pd.read_csv(f"/root/nfs/CLIR/data/transliterations/mmarco_v2_{lang}_dev_small_uroman.tsv", sep="\t", header=None, names=["qid", "query"])
+    queries_translit = pd.read_csv(f"{TRANSLITERATIONS_DIR}/mmarco_v2_{lang}_dev_small_uroman.tsv", sep="\t", header=None, names=["qid", "query"])
     queries_translit["query"] = queries_translit["query"].astype(str)
     queries_translit["qid"] = queries_translit["qid"].astype(str)
     logging.info(f"Loaded {len(queries_translit)} queries for transliterated {dataset_name}/{lang}")
@@ -78,12 +81,12 @@ logging.info(f"Loaded index {index_path}")
 pipeline = encoder >> idx.np_retriever()
 
 # create a directory for retrieval results if they do not exist
-os.makedirs(f"/root/nfs/CLIR/data/retrieval_results/{first_stage_model}", exist_ok=True)
+os.makedirs(f"{RETRIEVAL_DIR}/{first_stage_model}", exist_ok=True)
 
 # dataset_name = dataset_name.replace("/", "")
 ## Run Retrieval for Native and Transliterated Queries
-res_orig_path = f"/root/nfs/CLIR/data/retrieval_results/{first_stage_model}/{first_stage_model}_{dataset_name_storage}_{lang}.res.gz"
-res_trans_path = f"/root/nfs/CLIR/data/retrieval_results/{first_stage_model}/{first_stage_model}_{dataset_name_storage}_{lang}_trans_uro.res.gz"
+res_orig_path = f"{RETRIEVAL_DIR}/{first_stage_model}/{first_stage_model}_{dataset_name_storage}_{lang}.res.gz"
+res_trans_path = f"{RETRIEVAL_DIR}/{first_stage_model}/{first_stage_model}_{dataset_name_storage}_{lang}_trans_uro.res.gz"
 
 if os.path.isfile(res_orig_path):
     logging.info(f"Results for {first_stage_model} retrieval for {lang} already exists")
