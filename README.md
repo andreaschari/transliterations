@@ -53,6 +53,10 @@ Note: you need to set the `output_path` variable in the `transliterate.py` scrip
 
 We provide the transliterated queries in the Hugging Face Collection [here](https://huggingface.co/collections/andreaschari/sigir2025-lost-in-transliteration-680a15e761a763a3d7e04775). You can download the transliterated queries from there and place them in the `TRANSLITERATIONS_DIR` path.
 
+### Training BGE-m3
+
+We provide both the model checkpoints and training triples on the Hugging Face Collection above, but if you want to produce your own training triples and BGE-m3 models, you can follow my instructions on this [repo](https://github.com/andreaschari/linguistic-transfer?tab=readme-ov-file#fine-tuning-the-models).
+
 ### Retrieval
 
 The list of available BGE-M3 and mT5 models can be found in the `models.py` file. The models are available in this [Hugging Face Collection](https://huggingface.co/collections/andreaschari/sigir2025-lost-in-transliteration-680a15e761a763a3d7e04775). You can use the `--model` argument to specify which model you want to use.
