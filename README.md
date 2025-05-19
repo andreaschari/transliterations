@@ -53,9 +53,15 @@ Note: you need to set the `output_path` variable in the `transliterate.py` scrip
 
 We provide the transliterated queries in the Hugging Face Collection [here](https://huggingface.co/collections/andreaschari/sigir2025-lost-in-transliteration-680a15e761a763a3d7e04775). You can download the transliterated queries from there and place them in the `TRANSLITERATIONS_DIR` path.
 
-### Training BGE-m3
+### Fine-tuning the Models
 
-We provide both the model checkpoints and training triples on the Hugging Face Collection above, but if you want to produce your own training triples and BGE-m3 models, you can follow my instructions on this [repo](https://github.com/andreaschari/linguistic-transfer?tab=readme-ov-file#fine-tuning-the-models).
+#### BGE-M3
+
+You can use the `finetune_bgem3.sh` script to fine-tune the BGE-M3 model on the mMARCO dataset. The only requirement is setting the `output_dir` variable to the desired output directory and `train_data` to the path of the training JSONL file. (We provide our JSONL files in the Hugging Face Collection but if you want to create your own you can follow the steps in our other repo [here](https://github.com/andreaschari/linguistic-transfer).)
+
+#### mT5
+
+You can use the `finetune_mt5.py` script to fine-tune the mT5 model on the mMARCO dataset.
 
 ### Retrieval
 
