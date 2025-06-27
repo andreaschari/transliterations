@@ -106,20 +106,11 @@ The `qualitative_analysis.ipynb` and the `significance_testing.ipynb` notebooks 
 If you use this code in your research, please cite the following paper:
 
 ```
-@inproceedings{10.1007/978-3-031-88717-8_22,
-author = {Chari, Andreas and MacAvaney, Sean and Ounis, Iadh},
-title = {Improving Low-Resource Retrieval Effectiveness Using Zero-Shot Linguistic Similarity Transfer},
-year = {2025},
-isbn = {978-3-031-88716-1},
-publisher = {Springer-Verlag},
-address = {Berlin, Heidelberg},
-url = {https://doi.org/10.1007/978-3-031-88717-8_22},
-doi = {10.1007/978-3-031-88717-8_22},
-abstract = {Globalisation and colonisation have led the vast majority of the world to use only a fraction of languages, such as English and French, to communicate, excluding many others. This has severely affected the survivability of many now-deemed vulnerable or endangered languages, such as Occitan and Sicilian. These languages often share some characteristics, such as elements of their grammar and lexicon, with other high-resource languages, e.g. French or Italian. They can be clustered into groups of language varieties with various degrees of mutual intelligibility. Current search systems are not usually trained on many of these low-resource varieties, leading search users to express their needs in a high-resource language instead. This problem is further complicated when most information content is expressed in a high-resource language, inhibiting even more retrieval in low-resource languages. We show that current search systems are not robust across language varieties, severely affecting retrieval effectiveness. Therefore, it would be desirable for these systems to leverage the capabilities of neural models to bridge the differences between these varieties. This can allow users to express their needs in their low-resource variety and retrieve the most relevant documents in a high-resource one. To address this, we propose fine-tuning neural rankers on pairs of language varieties, thereby exposing them to their linguistic similarities (). We find that this approach improves the performance of the varieties upon which the models were directly trained, thereby regularising these models to generalise and perform better even on unseen language variety pairs. We also explore whether this approach can transfer across language families and observe mixed results that open doors for future research.},
-booktitle = {Advances in Information Retrieval: 47th European Conference on Information Retrieval, ECIR 2025, Lucca, Italy, April 6–10, 2025, Proceedings, Part IV},
-pages = {290–306},
-numpages = {17},
-keywords = {low resource information retrieval, zero-shot transfer},
-location = {Lucca, Italy}
+@inproceedings{chari:sigir2025-translit,
+  author = {Chari, Andreas and Ounis, Iadh and MacAvaney, Sean},
+  title = {Lost in Transliteration: Bridging the Script Gap in Neural IR},
+  booktitle = {Proceedings of the 48th International ACM SIGIR Conference on Research and Development in Information Retrieval},
+  year = {2025}
 }
+
 ```
