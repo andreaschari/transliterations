@@ -1,6 +1,6 @@
 # Lost in Transliteration: Bridging the Script Gap in Neural IR
 
-Code for the ECIR 2025 IR4Good Paper
+Code for the SIGIR 2025 Paper
 
 ## Abstract
 
